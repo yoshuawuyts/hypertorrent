@@ -55,8 +55,8 @@ var usage = `
 
     // SLEEP will make this redundant
     try {
-      var secretKey = fs.readFileSync(path.join(dbdir, 'secret-key'))
-      var key = fs.readFileSync(path.join(dbdir, 'key'))
+      var secretKey = fs.readFileSync(path.join(dbdir, 'SECRET_KEY'))
+      var key = fs.readFileSync(path.join(dbdir, 'KEY'))
     } catch (e) {
     }
 
@@ -86,10 +86,10 @@ var usage = `
 
       // this should no longer be necessary once SLEEP lands
       var _secretKey = ht.archive.metadata.secretKey
-      fs.writeFileSync(path.join(dbdir, 'secret-key'), _secretKey)
+      fs.writeFileSync(path.join(dbdir, 'SECRET_KEY'), _secretKey)
 
       var _key = ht.archive.metadata.key
-      fs.writeFileSync(path.join(dbdir, 'key'), _key)
+      fs.writeFileSync(path.join(dbdir, 'KEY'), _key)
 
       var downloadSpeed = speedometer()
       var uploadSpeed = speedometer()
