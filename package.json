@@ -18,12 +18,9 @@
     "map-limit": "0.0.1",
     "minimist": "^1.2.0",
     "mkdirp": "^0.5.1",
-    "normcore": "^1.1.0",
     "prettier-bytes": "^1.0.3",
-    "progress-string": "^1.2.1",
     "pump": "^1.0.2",
     "random-access-file": "^1.4.0",
-    "run-series": "^1.1.4",
     "speedometer": "^1.0.0",
     "torrent-stream": "^1.0.3",
     "xtend": "^4.0.1"

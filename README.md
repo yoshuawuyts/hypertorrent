@@ -27,7 +27,9 @@ var hypertorrent = require('hypertorrent')
 var memdb = require('memdb')
 
 var db = memdb()
-var ht = hypertorrent('<magnet-link>', db)
+var ht = hypertorrent('<magnet-link>', db, function (err) {
+  if (err) throw err
+})
 
 var archive = ht.archive // torrent-stream instance
 var torrent = ht.torrent // hyperdrive instance
