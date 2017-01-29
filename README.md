@@ -13,8 +13,10 @@ Stream a torrent into a hyperdrive
     <default>  Convert a torrent link or file to a hyperdrive, returns a key
 
   Options:
-    -h, --help      Print usage
-    -v, --version   Print version
+    -d, --daemon          Keep all open after torrent is done downloading
+    -h, --help            Print usage
+    -k, --keep-uploading  Keep hyperdrive open after torrent is done downloading
+    -v, --version         Print version
 
   Examples:
     $ hypertorrent ./my-science-data.torrent /tmp/foobar

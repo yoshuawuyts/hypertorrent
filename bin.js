@@ -18,9 +18,17 @@ var hypertorrent = require('./')
 var diff = Diff()
 
 var argv = minimist(process.argv.slice(2), {
+  alias: {
+    'd': 'daemon',
+    'h': 'help',
+    'v': 'version',
+    'k': 'keep-uploading'
+  },
   boolean: [
+    'daemon',
+    'help',
     'version',
-    'help'
+    'keep-uploading'
   ]
 })
 
@@ -32,8 +40,10 @@ var usage = `
     <default>  Convert a torrent link or file to a hyperdrive, returns a key
 
   Options:
-    -h, --help      Print usage
-    -v, --version   Print version
+    -d, --daemon       Keep all open after torrent is done downloading
+    -h, --help         Print usage
+    -k, --keep-uploading  Keep hyperdrive open after torrent is done downloading
+    -v, --version      Print version
 
   Examples:
     $ hypertorrent ./my-science-data.torrent /tmp/foobar
@@ -74,21 +84,37 @@ var usage = `
     }
 
     if (isFile.sync(String(torrent))) torrent = fs.readFileSync(torrent)
+    var done = false
     var ht = hypertorrent(torrent, db, opts, function (err) {
       if (err) throw err
+      if (done && argv['keep-uploading']) torrentStream.destroy()
     })
 
-    hyperdiscovery(ht.archive)
-    ht.archive.open(function () {
-      var key = ht.archive.key.toString('hex')
-      var health = hyperhealth(ht.archive)
+    var archive = ht.archive
+    var torrentStream = ht.torrent
+
+    if (argv['keep-uploading']) {
+      torrentStream.on('idle', function () {
+        done = true
+      })
+    } else if (!argv.daemon) {
+      torrentStream.on('idle', function () {
+        console.log('Torrent downloaded successfully, exiting')
+        process.exit()
+      })
+    }
+
+    hyperdiscovery(archive)
+    archive.open(function () {
+      var key = archive.key.toString('hex')
+      var health = hyperhealth(archive)
       var swarm = ht.torrent.swarm
 
       // this should no longer be necessary once SLEEP lands
-      var _secretKey = ht.archive.metadata.secretKey
+      var _secretKey = archive.metadata.secretKey
       fs.writeFileSync(path.join(dbdir, 'SECRET_KEY'), _secretKey)
 
-      var _key = ht.archive.metadata.key
+      var _key = archive.metadata.key
       fs.writeFileSync(path.join(dbdir, 'KEY'), _key)
 
       var downloadSpeed = speedometer()
@@ -96,10 +122,10 @@ var usage = `
       var ds = 0
       var us = 0
 
-      ht.archive.on('upload', function (data) {
+      archive.on('upload', function (data) {
         us = uploadSpeed(data.length)
       })
-      ht.archive.on('download', function (data) {
+      archive.on('download', function (data) {
         ds = downloadSpeed(data.length)
       })
 
