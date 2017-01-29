@@ -37,6 +37,23 @@ var torrent = ht.torrent // hyperdrive instance
 hyperdiscovery(archive)   // expose it to the network
 ```
 
+## API
+### ht = hypertorrent(bufferOrMagnetLink, db, [opts], callback)
+Create a new hypertorrent instace from a `Buffer` containing the contents of a
+`.torrent` file or a magnet link. Takes a `level` database to store the files.
+`opts` is passed directly to `hyperdrive`; it takes an extra property of `.key`
+to create the public key if already exists.
+
+### archive = ht.archive
+The `hyperdrive` instance created by `hypertorrent`
+
+### torrent = ht.torrent
+The `torrent-stream` instance created by `hypertorrent`
+
+## See Also
+- [mafintosh/hyperdrive](https://github.com/mafintosh/hyperdrive)
+- [mafintosh/torrent-stream](https://github.com/mafintosh/torrent-stream)
+
 ## License
 [MIT](https://tldrlegal.com/license/mit-license)
 
