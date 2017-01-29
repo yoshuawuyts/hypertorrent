@@ -17,7 +17,7 @@ Stream a torrent into a hyperdrive
     -v, --version   Print version
 
   Examples:
-    $ hypertorrent ./my-science-data.torrent
+    $ hypertorrent ./my-science-data.torrent /tmp/foobar
 ```
 
 ## JS API
@@ -27,10 +27,10 @@ var hypertorrent = require('hypertorrent')
 var memdb = require('memdb')
 
 var db = memdb()
-var tth = hypertorrent('<magnet-link>', db)
+var ht = hypertorrent('<magnet-link>', db)
 
-var archive = tth.archive // torrent-stream instance
-var torrent = tth.torrent // hyperdrive instance
+var archive = ht.archive // torrent-stream instance
+var torrent = ht.torrent // hyperdrive instance
 
 hyperdiscovery(archive)   // expose it to the network
 ```

@@ -36,7 +36,7 @@ var usage = `
     -v, --version   Print version
 
   Examples:
-    $ hypertorrent ./my-torrent.torrent
+    $ hypertorrent ./my-science-data.torrent /tmp/foobar
 `
 
 ;(function main (argv) {
