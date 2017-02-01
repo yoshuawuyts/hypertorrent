@@ -91,14 +91,14 @@ var usage = `
     })
 
     var archive = ht.archive
-    var torrentStream = ht.torrent
+    var torrentStream = ht.torrent.torrents[0]
 
     if (argv['keep-uploading']) {
-      torrentStream.on('idle', function () {
+      torrentStream.on('done', function () {
         done = true
       })
     } else if (!argv.daemon) {
-      torrentStream.on('idle', function () {
+      torrentStream.on('done', function () {
         console.log('Torrent downloaded successfully, exiting')
         process.exit()
       })
