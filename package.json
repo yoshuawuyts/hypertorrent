@@ -2,7 +2,7 @@
   "name": "hypertorrent",
   "description": "Stream a torrent into a hyperdrive",
   "repository": "yoshuawuyts/hypertorrent",
-  "version": "2.0.1",
+  "version": "3.0.0",
   "scripts": {
     "deps": "dependency-check . && dependency-check . --extra --no-dev",
     "start": "node .",
