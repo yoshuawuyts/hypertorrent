@@ -16,13 +16,14 @@
     "is-file": "^1.0.0",
     "level": "^1.5.0",
     "map-limit": "0.0.1",
+    "memory-chunk-store": "^1.2.0",
     "minimist": "^1.2.0",
     "mkdirp": "^0.5.1",
     "prettier-bytes": "^1.0.3",
     "pump": "^1.0.2",
     "random-access-file": "^1.4.0",
     "speedometer": "^1.0.0",
-    "torrent-stream": "^1.0.3",
+    "webtorrent": "^0.98.3",
     "xtend": "^4.0.1"
   },
   "devDependencies": {
@@ -34,7 +35,8 @@
     "hyperdrive",
     "hypercore",
     "torrent",
-    "stream"
+    "stream",
+    "webtorrent"
   ],
   "bin": {
     "hypertorrent": "./bin.js"

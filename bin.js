@@ -108,7 +108,6 @@ var usage = `
     archive.open(function () {
       var key = archive.key.toString('hex')
       var health = hyperhealth(archive)
-      var swarm = ht.torrent.swarm
 
       // this should no longer be necessary once SLEEP lands
       var _secretKey = archive.metadata.secretKey
@@ -130,6 +129,7 @@ var usage = `
       })
 
       diff.pipe(process.stdout)
+
       setInterval(function () {
         var data = health.get()
         diff.write(`
@@ -138,9 +138,9 @@ Hyperdrive key: ${key}
 Hyperdrive peer count: ${data.peers.length}
 Hyperdrive upload speed: ${pretty(us)}
 Hyperdrive download speed: ${pretty(ds)}
-Torrent peer count: ${swarm.connections.length}
-Torrent upload speed: ${pretty(swarm.uploadSpeed())}
-Torrent download speed: ${pretty(swarm.downloadSpeed())}
+Torrent peer count: ${ht.torrent.torrents[0].numPeers}
+Torrent upload speed: ${pretty(ht.torrent.uploadSpeed)}
+Torrent download speed: ${pretty(ht.torrent.downloadSpeed)}
         `)
       }, 1000)
     })

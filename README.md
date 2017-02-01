@@ -33,8 +33,8 @@ var ht = hypertorrent('<magnet-link>', db, function (err) {
   if (err) throw err
 })
 
-var archive = ht.archive // torrent-stream instance
-var torrent = ht.torrent // hyperdrive instance
+var archive = ht.archive // hyperdrive instance
+var torrent = ht.torrent // webtorrent instance
 
 hyperdiscovery(archive)   // expose it to the network
 ```
@@ -50,11 +50,11 @@ to create the public key if already exists.
 The `hyperdrive` instance created by `hypertorrent`
 
 ### torrent = ht.torrent
-The `torrent-stream` instance created by `hypertorrent`
+The `webtorrent` instance created by `hypertorrent`
 
 ## See Also
 - [mafintosh/hyperdrive](https://github.com/mafintosh/hyperdrive)
-- [mafintosh/torrent-stream](https://github.com/mafintosh/torrent-stream)
+- [feross/webtorrent](https://github.com/feross/webtorrent)
 
 ## License
 [MIT](https://tldrlegal.com/license/mit-license)
